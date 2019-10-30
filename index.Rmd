@@ -4,13 +4,12 @@ output:
   html_document:
     toc: true
     toc_float: true
-    theme: cerulean
 ---
 
 ### About Me
 I am a second year MPH student in Epidemiology with Applied Biostatistics certificate. 
 
-You can find me on [LinkedIn](https://www.linkedin.com/in/stephanie-zhen/) or [here] ()
+You can find me on [LinkedIn](https://www.linkedin.com/in/stephanie-zhen/) or [here](Resume.html)
 
 ### Favorite Pictures
 A snap here or there when the scenic view looks good.
@@ -18,7 +17,7 @@ A snap here or there when the scenic view looks good.
 
 CN Tower view
 
-Can you find the partial solar esclipse (taken with my not so great phone camera) from Aug 2017?
+Can you find the partial solar eclipse (taken with my not so great phone camera) from Aug 2017?
 <img src="pics/Solar_Eclipse_2017.jpg" style="width:75%">
 
 
