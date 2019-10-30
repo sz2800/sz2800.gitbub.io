@@ -1,0 +1,69 @@
+---
+title: "Resume"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cerulean
+---
+
+## EDUCATION					
+##### Columbia University Mailman School of Public Health	
+Masters in Public Health in Epidemiology, Certificate in Applied Biostatistics. 
+Awards: Harriet and Robert Heilbrunn Scholarship
+
+##### Skidmore College, Saratoga Springs, NY
+Bachelor of Arts, Chemistry, Biochemistry Concentration
+ 
+ 
+#### RELEVANT COURSES:
+•	Data Science (R)
+
+•	Applied Regression 1 & 2
+
+•	Analysis of Categorical Data
+
+•	Application of Epi Research Method (SAS)
+
+•	Relational Database and SQL Programming (SQL)
+ 
+
+### SKILLS and CERTIFICATION
+•	Computer: Microsoft Word, Excel, PowerPoint, Access (Fall 2019), SAS, R (Fall 2019), SQL (Fall 2019)    
+
+•	Language: English (native), Cantonese (fluent)
+
+•	Certifications: HIPAA, CITI Human Subjects
+ 
+
+## RESEARCH EXPERIENCE
+### New York State Psychiatric Institute (NYPSI)
+New York, GPEG. Intern	
+
+•	Acquired Stress & Justice (SNJ) study, conducted descriptive and statistical analyses in SAS code.
+
+•	Data cleaning, including formatting, recoding, and merging variables in SAS code.
+
+•	Reported results in the form of a Poster presentation to GPEG.
+
+•	Attempted propensity scores to adjusted for baseline covariates. 
+
+### NYU Langone Medical Center
+New York, Microbiology Dept., Research Associate	
+
+Conducted experiments to identify the mechanism in which YE0566 (substrate of interest) induces the phage shock response, to increase understanding of how the conserved stress response is important for pathogen virulence. 
+
+•	Genetic Screen to find YE0566 mutants
+
+•	Gene characterization using B-galactosidase assay, western blotting, pull-downs.
+
+•	Analyzed data, reviewed findings, and interpreted findings. 
+
+### Skidmore College
+Chemistry Department, Undergraduate Research Assistant
+
+Conducted experiments to incorporate the new amino acid, pyroglutamate (pGlu), in the genome of E.coli with enhanced yellow fluorescent protein (eYFP) to expand research about pGlu and its implication in Alzheimer’s.
+
+•	Optimized production of eYFP and purifying eYFP with nickel affinity chromatography.
+
+•	Confirmed presence and analyzed concentration of eYFP through PAGE and the fluorimeter.
