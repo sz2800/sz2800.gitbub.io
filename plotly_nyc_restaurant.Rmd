@@ -1,0 +1,99 @@
+---
+title: "Plotly_NYC Restaurants"
+author: "Stephanie Zhen"
+date: "10/30/2019"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+library(viridis)
+library(plotly)
+library(lubridate)
+library(p8105.datasets)
+```
+
+```{r}
+data(rest_inspec)
+
+str(rest_inspec)
+dim(rest_inspec)
+summary(rest_inspec)
+```
+
+```{r}
+rest_inspec_clean = rest_inspec %>%
+  janitor::clean_names() %>%
+  na.omit() %>%
+  mutate(ginspection_date = as.Date(inspection_date),
+         year_inspect = year(inspection_date)) %>%
+  mutate(grade_date = as.Date(grade_date), record_date = as.Date(record_date),
+         critical_flag = as.factor(critical_flag), 
+         critical_flag_num = ifelse(critical_flag == "N", 0, 1)) %>%
+  mutate(grade = as.factor(grade),
+         grade = fct_relevel(grade, c("A", "B", "C", "P", "Z", "Not Yet Graded"))) %>% 
+  mutate(boro = str_to_lower(boro),
+         boro = as.factor(boro),
+         boro = fct_relevel(boro, c("manhattan", "bronx", "brooklyn", "queens", "staten island")))
+
+```
+
+
+```{r}
+nyc_insp_preplot = rest_inspec_clean %>%
+  select(boro, critical_flag_num, year_inspect) %>%
+  group_by(year_inspect, boro) %>%
+  summarize(n = n(), sum = sum(critical_flag_num))
+
+# the actual graph
+nyc_insp_plot = nyc_insp_preplot %>%
+  ungroup() %>%
+  plot_ly(x = ~year_inspect, y = ~sum, 
+        linetype = ~boro, mode = 'lines', type = "scatter", colors= "Set3") %>%
+  layout(title = 'Number of Critical Flags During inspection (2014-2017)',
+         xaxis = list(title = 'Year of Inspection'),
+         yaxis = list (title = 'Number of Critical Flags'))
+
+nyc_insp_plot 
+```
+
+
+```{r}
+nyc_cusine_manh_pre = rest_inspec_clean %>% 
+  filter (boro == "manhattan", grade == "A") %>% 
+  count(cuisine_description) %>% 
+  mutate(cuisine_description = fct_reorder(cuisine_description, n)) %>% 
+  top_n(15)
+
+  nyc_cusine_manh_plot = plot_ly(
+    nyc_cusine_manh_pre, x = ~cuisine_description, y = ~n, color = ~cuisine_description, type = "bar", colors = "Set3"
+    ) %>% 
+    layout(title = 'A grade Restaurants in Manhattan Categorized by Cuisine Types',
+           xaxis = list(title = 'Type of Cuisine'),
+           yaxis = list(title = 'Number of Restaurants'))
+  
+  nyc_cusine_manh_plot
+```
+
+```{r}
+nyc_grade_score_pre = rest_inspec_clean %>% 
+  select(boro, grade, score, year_inspect) %>% 
+  filter(boro != "missing", grade %in% c("A", "B", "C"), year_inspect == "2017")
+  
+nyc_grade_score_plot = plot_ly(
+    nyc_grade_score_pre, x = ~boro, y = ~score, color = ~grade, type = "box", colors = "Set2"
+    ) %>% 
+    layout(title = 'Scores in different Boroughs of NYC',
+           xaxis = list(title = 'Borough'),
+           yaxis = list(title = 'Scores'))
+
+nyc_grade_score_plot %>% 
+  layout(boxmode ='group')
+```
+
+

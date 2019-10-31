@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Stephanie Zhen" />
+
+<meta name="date" content="2019-10-30" />
+
+<title>Plotly_NYC Restaurants</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="Resume.html">Resume</a>
+</li>
+<li>
+  <a href="mailto:&lt;sz2800@cumc.columbia.edu&gt;">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://github.com/sz2800/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Plotly_NYC Restaurants</h1>
+<h4 class="author">Stephanie Zhen</h4>
+<h4 class="date">10/30/2019</h4>
+
+</div>
+
+
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## v ggplot2 3.2.1     v purrr   0.3.2
+## v tibble  2.1.3     v dplyr   0.8.3
+## v tidyr   1.0.0     v stringr 1.4.0
+## v readr   1.3.1     v forcats 0.4.0</code></pre>
+<pre><code>## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(viridis)</code></pre>
+<pre><code>## Loading required package: viridisLite</code></pre>
+<pre class="r"><code>library(p8105.datasets)
+
+library(plotly)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;plotly&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
+## 
+##     last_plot</code></pre>
+<pre><code>## The following object is masked from &#39;package:stats&#39;:
+## 
+##     filter</code></pre>
+<pre><code>## The following object is masked from &#39;package:graphics&#39;:
+## 
+##     layout</code></pre>
+<pre class="r"><code>set.seed(1)
+data(rest_inspec)</code></pre>
+<pre class="r"><code>summary(rest_inspec)</code></pre>
+<pre><code>##     action              boro             building        
+##  Length:397584      Length:397584      Length:397584     
+##  Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character  
+##                                                          
+##                                                          
+##                                                          
+##                                                          
+##      camis          critical_flag      cuisine_description
+##  Min.   :30075445   Length:397584      Length:397584      
+##  1st Qu.:41227319   Class :character   Class :character   
+##  Median :41622444   Mode  :character   Mode  :character   
+##  Mean   :44534756                                         
+##  3rd Qu.:50011150                                         
+##  Max.   :50071063                                         
+##                                                           
+##      dba            inspection_date               inspection_type   
+##  Length:397584      Min.   :1900-01-01 00:00:00   Length:397584     
+##  Class :character   1st Qu.:2015-03-17 00:00:00   Class :character  
+##  Mode  :character   Median :2016-02-03 00:00:00   Mode  :character  
+##                     Mean   :2015-09-27 22:03:03                     
+##                     3rd Qu.:2016-12-13 00:00:00                     
+##                     Max.   :2017-10-17 00:00:00                     
+##                                                                     
+##     phone            record_date                      score       
+##  Length:397584      Min.   :2017-10-19 06:00:49   Min.   : -2.00  
+##  Class :character   1st Qu.:2017-10-19 06:00:49   1st Qu.: 11.00  
+##  Mode  :character   Median :2017-10-19 06:00:49   Median : 15.00  
+##                     Mean   :2017-10-19 06:00:49   Mean   : 18.93  
+##                     3rd Qu.:2017-10-19 06:00:49   3rd Qu.: 24.00  
+##                     Max.   :2017-10-19 06:00:59   Max.   :151.00  
+##                                                   NA&#39;s   :22642   
+##     street          violation_code     violation_description
+##  Length:397584      Length:397584      Length:397584        
+##  Class :character   Class :character   Class :character     
+##  Mode  :character   Mode  :character   Mode  :character     
+##                                                             
+##                                                             
+##                                                             
+##                                                             
+##     zipcode         grade             grade_date                 
+##  Min.   :10001   Length:397584      Min.   :2012-05-01 00:00:00  
+##  1st Qu.:10022   Class :character   1st Qu.:2015-03-30 00:00:00  
+##  Median :10468   Mode  :character   Median :2016-02-17 00:00:00  
+##  Mean   :10675                      Mean   :2016-01-31 05:45:17  
+##  3rd Qu.:11229                      3rd Qu.:2016-12-13 00:00:00  
+##  Max.   :11697                      Max.   :2017-10-17 00:00:00  
+##  NA&#39;s   :5                          NA&#39;s   :204287</code></pre>
+<pre class="r"><code>nyc_inspec = rest_inspec %&gt;%
+  janitor::clean_names() %&gt;% 
+  mutate(grade = as.factor(grade),
+         grade = fct_relevel(grade, c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;P&quot;, &quot;Z&quot;, &quot;Not Yet Graded&quot;))) %&gt;% 
+  mutate(boro = str_to_lower(boro),
+         boro = as.factor(boro),
+         boro = fct_relevel(boro, c(&quot;manhattan&quot;, &quot;bronx&quot;, &quot;brooklyn&quot;, &quot;queens&quot;, &quot;staten island&quot;)))</code></pre>
+<pre class="r"><code>nyc_cusine_manh = nyc_inspec %&gt;% 
+  filter (boro == &quot;manhattan&quot;, grade == &quot;C&quot;) %&gt;% 
+  count(cuisine_description) %&gt;% 
+  mutate(cuisine_description = fct_reorder(cuisine_description, n)) %&gt;% 
+  filter(n &gt;= 100)
+
+  plot_ly(nyc_cusine_manh, x = ~cuisine_description, y = ~n, color = ~cuisine_description, type = &quot;bar&quot;)</code></pre>
+<pre><code>## Warning in RColorBrewer::brewer.pal(N, &quot;Set2&quot;): n too large, allowed maximum for palette Set2 is 8
+## Returning the palette you asked for with that many colors
+
+## Warning in RColorBrewer::brewer.pal(N, &quot;Set2&quot;): n too large, allowed maximum for palette Set2 is 8
+## Returning the palette you asked for with that many colors</code></pre>
+<div id="htmlwidget-f843a680a1fcd62a0dd1" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f843a680a1fcd62a0dd1">{"x":{"visdat":{"299c752d460c":["function () ","plotlyVisDat"]},"cur_data":"299c752d460c","attrs":{"299c752d460c":{"x":{},"y":{},"color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"cuisine_description","type":"category","categoryorder":"array","categoryarray":["Bottled beverages, including water, sodas, juices, etc.","Russian","Iranian","Moroccan","Other","English","Brazilian","Continental","Bangladeshi","Salads","Sandwiches","Soul Food","Donuts","Polynesian","Tex-Mex","Vegetarian","Vietnamese/Cambodian/Malaysia","Chinese/Japanese","Ice Cream, Gelato, Yogurt, Ices","Irish","Middle Eastern","African","Bagels/Pretzels","Peruvian","Eastern European","Steak","Juice, Smoothies, Fruit Salads","Mediterranean","Sandwiches/Salads/Mixed Buffet","Chicken","Caribbean","Korean","Hamburgers","Pizza/Italian","Seafood","Thai","Bakery","Delicatessen","CafÃ©/Coffee/Tea","Spanish","French","Indian","Mexican","Pizza","Latin (Cuban, Dominican, Puerto Rican, South & Central American)","Asian","Japanese","Italian","Chinese","American"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"n"},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["Asian"],"y":[145],"type":"bar","name":"Asian","marker":{"color":"rgba(209,189,162,1)","line":{"color":"rgba(209,189,162,1)"}},"textfont":{"color":"rgba(209,189,162,1)"},"error_y":{"color":"rgba(209,189,162,1)"},"error_x":{"color":"rgba(209,189,162,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Japanese"],"y":[171],"type":"bar","name":"Japanese","marker":{"color":"rgba(202,186,166,1)","line":{"color":"rgba(202,186,166,1)"}},"textfont":{"color":"rgba(202,186,166,1)"},"error_y":{"color":"rgba(202,186,166,1)"},"error_x":{"color":"rgba(202,186,166,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Italian"],"y":[179],"type":"bar","name":"Italian","marker":{"color":"rgba(194,184,170,1)","line":{"color":"rgba(194,184,170,1)"}},"textfont":{"color":"rgba(194,184,170,1)"},"error_y":{"color":"rgba(194,184,170,1)"},"error_x":{"color":"rgba(194,184,170,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Chinese"],"y":[409],"type":"bar","name":"Chinese","marker":{"color":"rgba(187,181,175,1)","line":{"color":"rgba(187,181,175,1)"}},"textfont":{"color":"rgba(187,181,175,1)"},"error_y":{"color":"rgba(187,181,175,1)"},"error_x":{"color":"rgba(187,181,175,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["American"],"y":[696],"type":"bar","name":"American","marker":{"color":"rgba(179,179,179,1)","line":{"color":"rgba(179,179,179,1)"}},"textfont":{"color":"rgba(179,179,179,1)"},"error_y":{"color":"rgba(179,179,179,1)"},"error_x":{"color":"rgba(179,179,179,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
