@@ -6,24 +6,23 @@ output:
     vertical_layout: fill
 ---
 
-```{r setup, include=FALSE, warning = FALSE, message = FALSE}
+```{r setup, include=FALSE}
 library(flexdashboard)
 library(tidyverse)
 library(viridis)
 library(plotly)
 library(lubridate)
 library(p8105.datasets)
+data(rest_inspec)
 ```
 
-```{r, warning = FALSE, message = FALSE}
-data(rest_inspec)
-
+```{r, eval = FALSE, warning = FALSE, message = FALSE}
 str(rest_inspec)
 dim(rest_inspec)
 summary(rest_inspec)
 ```
 
-```{r}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 rest_inspec_clean = rest_inspec %>%
   janitor::clean_names() %>%
   na.omit() %>%
@@ -45,7 +44,7 @@ Column {data-width=650}
 
 ### Chart A
 
-```{r, warning = FALSE, message = FALSE}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 nyc_cusine_manh_pre = rest_inspec_clean %>% 
   filter (boro == "manhattan", grade == "A") %>% 
   count(cuisine_description) %>% 
@@ -55,9 +54,11 @@ nyc_cusine_manh_pre = rest_inspec_clean %>%
   nyc_cusine_manh_plot = plot_ly(
     nyc_cusine_manh_pre, x = ~cuisine_description, y = ~n, color = ~cuisine_description, type = "bar", colors = "Set3"
     ) %>% 
-    layout(title = 'A grade Restaurants in Manhattan Categorized by Cuisine Types',
+        layout(title = 'A grade Restaurants in Manhattan Categorized by Cuisine Types',
            xaxis = list(title = 'Type of Cuisine'),
-           yaxis = list(title = 'Number of Restaurants'))
+           yaxis = list(title = 'Number of Restaurants'), 
+           showlegend = FALSE)
+
 
     nyc_cusine_manh_plot
 ```
@@ -67,7 +68,7 @@ Column {data-width=350}
 
 ### Chart B
 
-```{r, warning = FALSE, message = FALSE}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 
 nyc_insp_preplot = rest_inspec_clean %>%
   select(boro, critical_flag_num, year_inspect) %>%
@@ -88,7 +89,7 @@ nyc_insp_plot
 
 ### Chart C
 
-```{r}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 nyc_grade_score_pre = rest_inspec_clean %>% 
   select(boro, grade, score, year_inspect) %>% 
   filter(boro != "missing", grade %in% c("A", "B", "C"), year_inspect == "2017")
