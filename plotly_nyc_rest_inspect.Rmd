@@ -52,9 +52,9 @@ nyc_cusine_manh_pre = rest_inspec_clean %>%
   top_n(10)
 
   nyc_cusine_manh_plot = plot_ly(
-    nyc_cusine_manh_pre, x = ~cuisine_description, y = ~n, color = ~cuisine_description, type = "bar", colors = "Set3"
+    nyc_cusine_manh_pre, x = ~cuisine_description, y = ~n, color = ~cuisine_description, type = "bar", colors = "Set1"
     ) %>% 
-        layout(title = 'A grade Restaurants in Manhattan Categorized by Cuisine Types',
+        layout(title = 'Grade "A" Restaurants in Manhattan Categorized by Cuisine Types',
            xaxis = list(title = 'Type of Cuisine'),
            yaxis = list(title = 'Number of Restaurants'), 
            showlegend = FALSE)
@@ -79,7 +79,7 @@ nyc_insp_plot = nyc_insp_preplot %>%
   ungroup() %>%
   plot_ly(x = ~year_inspect, y = ~sum, 
         linetype = ~boro, mode = 'lines', type = "scatter", colors= "Set3") %>%
-  layout(title = 'Number of Critical Flags During inspection (2014-2017)',
+  layout(title = 'Number of Critical Flags During Inspection (2014-2017)',
          xaxis = list(title = 'Year of Inspection'),
          yaxis = list (title = 'Number of Critical Flags'))
 
@@ -96,7 +96,7 @@ nyc_grade_score_pre = rest_inspec_clean %>%
 nyc_grade_score_plot = plot_ly(
     nyc_grade_score_pre, x = ~boro, y = ~score, color = ~grade, type = "box", colors = "Set2"
     ) %>% 
-    layout(title = 'Scores in different Boroughs of NYC',
+    layout(title = 'Scores in Relation to its Grade in different Boroughs of NYC',
            xaxis = list(title = 'Borough'),
            yaxis = list(title = 'Scores'))
 
