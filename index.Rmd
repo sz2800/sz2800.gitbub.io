@@ -12,7 +12,9 @@ I am a second year MPH student in Epidemiology with Applied Biostatistics certif
 You can find me on [LinkedIn](https://www.linkedin.com/in/stephanie-zhen/) or [here](Resume.html)
 
 ### Favorite Pictures
+
 I like taking scenic pictures.
+
 <img src="pics/CN_Tower View.jpg" style="width:60%">
 
 CN Tower view
