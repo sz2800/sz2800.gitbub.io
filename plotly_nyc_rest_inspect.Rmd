@@ -6,7 +6,7 @@ output:
     vertical_layout: fill
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, warning = FALSE, message = FALSE}
 library(flexdashboard)
 library(tidyverse)
 library(viridis)
@@ -15,7 +15,7 @@ library(lubridate)
 library(p8105.datasets)
 ```
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 data(rest_inspec)
 
 str(rest_inspec)
@@ -45,7 +45,7 @@ Column {data-width=650}
 
 ### Chart A
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 nyc_cusine_manh_pre = rest_inspec_clean %>% 
   filter (boro == "manhattan", grade == "A") %>% 
   count(cuisine_description) %>% 
@@ -67,7 +67,7 @@ Column {data-width=350}
 
 ### Chart B
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 
 nyc_insp_preplot = rest_inspec_clean %>%
   select(boro, critical_flag_num, year_inspect) %>%
