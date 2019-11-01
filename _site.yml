@@ -3,10 +3,16 @@ output_dir: "."
 navbar:
   title: "Home"
   right:
+    - text: "About Me"
+      href: index.html
     - text: "Professional Experience"
       href: Resume.html
-    - text: "Dashboard"
-      href: flex_dashboard/plotly_nyc_rest_inspect.html
+    - text: Examples
+      menu:
+      - text: "Plotly"
+        href: plotly.html      
+      - text: "Dashboard"
+        href: flex_dashboard/plotly_nyc_rest_inspect.html
     - icon: fa-envelope fa-lg
       href: mailto:<sz2800@cumc.columbia.edu>
     - icon: fa-github fa-lg
