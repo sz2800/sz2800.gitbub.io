@@ -6,7 +6,7 @@ navbar:
     - text: "Resume"
       href: Resume.html
     - text: "Restaurant Inspection"
-      href: plotly_nyc_rest_inspect.html
+      href: flex_dashboard/plotly_nyc_rest_inspect.html
     - icon: fa-envelope fa-lg
       href: mailto:<sz2800@cumc.columbia.edu>
     - icon: fa-github fa-lg
