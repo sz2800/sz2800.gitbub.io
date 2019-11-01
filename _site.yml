@@ -3,9 +3,9 @@ output_dir: "."
 navbar:
   title: "Home"
   right:
-    - text: "Resume"
+    - text: "Professional Experience"
       href: Resume.html
-    - text: "Restaurant Inspection"
+    - text: "Dashboard"
       href: flex_dashboard/plotly_nyc_rest_inspect.html
     - icon: fa-envelope fa-lg
       href: mailto:<sz2800@cumc.columbia.edu>
